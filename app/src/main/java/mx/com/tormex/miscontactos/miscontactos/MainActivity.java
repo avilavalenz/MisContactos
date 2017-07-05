@@ -1,41 +1,44 @@
 package mx.com.tormex.miscontactos.miscontactos;
 
-import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import mx.com.tormex.miscontactos.miscontactos.adapter.ContactoAdaptador;
+import mx.com.tormex.miscontactos.miscontactos.adapter.PageAdapter;
+import mx.com.tormex.miscontactos.miscontactos.fragment.PerfilFragment;
+import mx.com.tormex.miscontactos.miscontactos.fragment.RecyclerViewFragment;
+import mx.com.tormex.miscontactos.miscontactos.pojo.Contacto;
+
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Contacto> contactos;
-    private RecyclerView listaContactos;
+
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        setUpViewPager();
+        if (toolbar != null){
+            setSupportActionBar(toolbar);
+        }
 
-        setSupportActionBar(miActionBar);
-        listaContactos = (RecyclerView) findViewById(R.id.rvContactos);
 
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        listaContactos.setLayoutManager(manager);
-
-        inicializarLista();
-        inicializarAdaptador();
-
+        //Toolbar miActionBar = (Toolbar) findViewById(R.id.miActionBar);
+        //setSupportActionBar(miActionBar);
 
         /*
         ArrayList<String> nombresContacto = new ArrayList<String>();
@@ -63,17 +66,18 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
-    public void inicializarAdaptador(){
-        ContactoAdaptador adaptador = new ContactoAdaptador(contactos, this);
-        listaContactos.setAdapter(adaptador);
+    private ArrayList<Fragment> agregarFragments(){
+        ArrayList<Fragment> fragments = new ArrayList<Fragment>();
+        fragments.add(new RecyclerViewFragment());
+        fragments.add(new PerfilFragment());
+        return fragments;
     }
 
-    public void inicializarLista(){
-        contactos = new ArrayList<Contacto>();
-        contactos.add(new Contacto(R.drawable.pamarillo, "Manuel Ávila", "8717370105", "manuel@gamil.com"));
-        contactos.add(new Contacto(R.drawable.pamarillo2, "Ani Acosta", "7292215", "ani@gamil.com"));
-        contactos.add(new Contacto(R.drawable.projo, "Alberto Valenzuela", "8711915018", "alberto@gamil.com"));
-        contactos.add(new Contacto(R.drawable.pamarillo, "Sofía Ayala", "8712125481", "sofia@gamil.com"));
-        contactos.add(new Contacto(R.drawable.pamarillo2, "Jorge Ávila", "8712125471", "jorge@gamil.com"));
+    public void setUpViewPager(){
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), agregarFragments()));
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_contacts);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_profile);
     }
+
 }

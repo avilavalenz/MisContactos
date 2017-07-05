@@ -1,4 +1,4 @@
-package mx.com.tormex.miscontactos.miscontactos;
+package mx.com.tormex.miscontactos.miscontactos.pojo;
 
 /**
  * Created by Sistemas on 21/06/2017.

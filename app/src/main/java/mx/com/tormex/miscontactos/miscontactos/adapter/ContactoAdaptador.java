@@ -1,4 +1,4 @@
-package mx.com.tormex.miscontactos.miscontactos;
+package mx.com.tormex.miscontactos.miscontactos.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import mx.com.tormex.miscontactos.miscontactos.pojo.Contacto;
+import mx.com.tormex.miscontactos.miscontactos.DetalleContactoActivity;
+import mx.com.tormex.miscontactos.miscontactos.R;
 
 /**
  * Created by Sistemas on 27/06/2017.

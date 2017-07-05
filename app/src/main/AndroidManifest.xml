@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mx.com.tormex.miscontactos.miscontactos">
 
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-    
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetalleContactoActivity"></activity>
+        <activity android:name=".DetalleContactoActivity" />
+        <activity android:name=".ContactoActivity"></activity>
     </application>
 
 </manifest>
